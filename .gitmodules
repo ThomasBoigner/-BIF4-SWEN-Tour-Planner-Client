@@ -1,0 +1,6 @@
+[submodule "BIF4-SWEN-Tour-Planner-Client"]
+	path = BIF4-SWEN-Tour-Planner-Client
+	url = git@github.com:ThomasBoigner/BIF4-SWEN-Tour-Planner-Client.git
+[submodule "BIF4-SWEN-Tour-Planner-Server"]
+	path = BIF4-SWEN-Tour-Planner-Server
+	url = git@github.com:ThomasBoigner/BIF4-SWEN-Tour-Planner-Server.git
