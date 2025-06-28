@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  tour-planner-server:
+    container_name: tour-planner-server
+    build:
+      context: BIF4-SWEN-Tour-Planner-Server
+      dockerfile: src/main/docker/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8080:8080/tcp"
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/change-me
+      - SPRING_DATASOURCE_USERNAME=change-me
+      - SPRING_DATASOURCE_PASSWORD=change-me
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    volumes:
+      - log4j2:/target/log4j-logs
+    networks:
+      - tour-planner
+
+  postgres:
+    image: 'postgres:17.5'
+    container_name: tour-planner-database
+    environment:
+      - POSTGRES_USER=change-me
+      - POSTGRES_PASSWORD=change-me
+    volumes:
+      - tour-planner-database:/var/lib/postgresql/data
+    networks:
+      - tour-planner
+
+  tour-planner-client:
+    build:
+      context: BIF4-SWEN-Tour-Planner-Client
+      dockerfile: src/docker/Dockerfile
+    ports:
+      - "4200:80"
+    networks:
+      - tour-planner
+
+volumes:
+  tour-planner-database: {}
+  log4j2: {}
+
+networks:
+  tour-planner:
+    driver: bridge
