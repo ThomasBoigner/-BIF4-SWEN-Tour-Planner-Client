@@ -8,7 +8,6 @@ services:
       dockerfile: src/main/docker/Dockerfile
     ports:
       - "8080:8080"
-      - "8080:8080/tcp"
     depends_on:
       - postgres
     environment:
